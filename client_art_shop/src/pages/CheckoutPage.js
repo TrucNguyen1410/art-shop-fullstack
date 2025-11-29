@@ -221,7 +221,7 @@ const CheckoutPage = ({ cart, setCart }) => {
 
                     {/* NÚT PAYPAL */}
                     {paymentMethod === 'paypal' ? (
-                        <PayPalScriptProvider options={{ "client-id": "Ac_m4_bzOHEmzAG2_du97...", "currency": "USD" }}>
+                        <PayPalScriptProvider options={{ "client-id": "AVSRUP65csLyFRCFwRXJnC2CtIXcUIL26Vm_JbN9oyPN3O4mDt23jLH0TKUSk3p2iLnq1IavzBaxGBB6", "currency": "USD" }}>
                             <PayPalButtons 
                                 style={{ layout: "vertical" }}
                                 createOrder={(data, actions) => {
