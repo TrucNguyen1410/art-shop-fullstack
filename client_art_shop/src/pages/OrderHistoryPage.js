@@ -30,7 +30,7 @@ const OrderHistoryPage = () => {
     try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
         // Đảm bảo link là HTTPS
-        const { data } = await axios.get('https://localhost:5000/api/orders/myorders', config);
+        const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/orders/myorders', config);
         setOrders(data);
     } catch (error) {
         console.error("Lỗi tải đơn hàng:", error);
@@ -48,7 +48,7 @@ const OrderHistoryPage = () => {
       if(!comment.trim()) { toast.warn("Hãy nhập nội dung đánh giá"); return; }
       try {
           const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-          await axios.post(`https://localhost:5000/api/products/${reviewProduct.product}/reviews`, { 
+          await axios.post(`https://art-shop-fullstack.onrender.com/api/products/${reviewProduct.product}/reviews`, { 
               rating, comment 
           }, config);
 

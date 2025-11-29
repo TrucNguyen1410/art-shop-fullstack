@@ -11,7 +11,7 @@ const LoginPage = ({ setUser }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('https://localhost:5000/api/auth/login', { email, password });
+      const { data } = await axios.post('https://art-shop-fullstack.onrender.com/api/auth/login', { email, password });
       setUser(data);
       localStorage.setItem('userInfo', JSON.stringify(data));
       

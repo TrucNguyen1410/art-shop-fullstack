@@ -17,7 +17,7 @@ npm start
 
 CÁCH LẤY LẠI DỮ LIỆU (MỞ KHÓA HTTPS)
 1. Mở một tab trình duyệt mới.
-2. Gõ vào thanh địa chỉ: https://localhost:5000/api/products (Nhớ kĩ là https).
+2. Gõ vào thanh địa chỉ: https://art-shop-fullstack.onrender.com/api/products (Nhớ kĩ là https).
 3. Trình duyệt sẽ hiện màn hình đỏ lòm cảnh báo "Kết nối không riêng tư".
 4. Bấm nút Nâng cao (Advanced) -> Chọn Tiếp tục truy cập localhost (Proceed to localhost).
 5. Khi bạn thấy một đống chữ (JSON) hiện ra trên màn hình trắng, nghĩa là đã thông luồng.

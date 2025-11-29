@@ -12,7 +12,7 @@ const ForgotPasswordPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post('https://localhost:5000/api/auth/forgot-password', { email });
+      const { data } = await axios.post('https://art-shop-fullstack.onrender.com/api/auth/forgot-password', { email });
       toast.success(data.data);
       // Chuyển sang trang nhập OTP
       navigate('/reset-password'); 

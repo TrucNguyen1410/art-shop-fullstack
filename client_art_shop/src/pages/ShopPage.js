@@ -38,7 +38,7 @@ const ShopPage = () => {
 
   // 2. Gọi API lấy sản phẩm
   const fetchProducts = async (params) => {
-    let url = `https://localhost:5000/api/products?` + params.toString();
+    let url = `https://art-shop-fullstack.onrender.com/api/products?` + params.toString();
     try {
       const { data } = await axios.get(url);
       setProducts(data);

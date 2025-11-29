@@ -20,7 +20,7 @@ const RegisterPage = ({ setUser }) => {
 
     try {
       // Gọi API đăng ký
-      const { data } = await axios.post('https://localhost:5000/api/auth/register', { 
+      const { data } = await axios.post('https://art-shop-fullstack.onrender.com/api/auth/register', { 
           username, 
           email, 
           password 

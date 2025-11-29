@@ -20,7 +20,7 @@ const CouponPage = () => {
   const fetchCoupons = async () => {
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        const { data } = await axios.get('https://localhost:5000/api/coupons', config);
+        const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/coupons', config);
         setCoupons(data);
     } catch (error) { console.error("Lỗi tải mã"); }
   };
@@ -29,7 +29,7 @@ const CouponPage = () => {
     e.preventDefault();
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        await axios.post('https://localhost:5000/api/coupons', {
+        await axios.post('https://art-shop-fullstack.onrender.com/api/coupons', {
             code, type, value, countInStock: count, expiryDate: expiry
         }, config);
         alert("Tạo mã thành công!");
@@ -44,7 +44,7 @@ const CouponPage = () => {
       if(window.confirm("Xóa mã này?")) {
         try {
             const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-            await axios.delete(`https://localhost:5000/api/coupons/${id}`, config);
+            await axios.delete(`https://art-shop-fullstack.onrender.com/api/coupons/${id}`, config);
             fetchCoupons();
         } catch (error) { alert("Lỗi xóa"); }
       }

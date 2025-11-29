@@ -9,7 +9,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axios.get('https://localhost:5000/api/products');
+        const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/products');
         setProducts(data);
       } catch (error) {
         console.error("Lỗi khi tải sản phẩm:", error);

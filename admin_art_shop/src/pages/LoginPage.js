@@ -10,7 +10,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('https://localhost:5000/api/auth/login', { email, password });
+      const { data } = await axios.post('https://art-shop-fullstack.onrender.com/api/auth/login', { email, password });
       
       // Kiểm tra quyền Admin ngay lúc đăng nhập
       if (data.isAdmin) {

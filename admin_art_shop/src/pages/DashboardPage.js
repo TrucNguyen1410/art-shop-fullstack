@@ -20,7 +20,7 @@ const DashboardPage = () => {
   // Hàm lấy danh sách sản phẩm từ Server
   const fetchProducts = async () => {
     try {
-        const { data } = await axios.get('https://localhost:5000/api/products');
+        const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/products');
         setProducts(data);
     } catch (error) {
         console.error("Lỗi lấy danh sách sản phẩm");
@@ -32,7 +32,7 @@ const DashboardPage = () => {
     if (window.confirm('Bạn có chắc chắn muốn xóa tác phẩm này không?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        await axios.delete(`https://localhost:5000/api/products/${id}`, config);
+        await axios.delete(`https://art-shop-fullstack.onrender.com/api/products/${id}`, config);
         fetchProducts(); // Tải lại danh sách sau khi xóa
       } catch (error) { 
         alert('Lỗi xóa sản phẩm'); 

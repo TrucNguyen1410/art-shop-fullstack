@@ -12,7 +12,7 @@ const ProductPage = ({ addToCart }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`https://localhost:5000/api/products/${id}`);
+        const { data } = await axios.get(`https://art-shop-fullstack.onrender.com/api/products/${id}`);
         setProduct(data);
       } catch (error) {
         console.error('Error fetching product');

@@ -18,7 +18,7 @@ const ResetPasswordPage = () => {
 
     try {
       // Gửi OTP và Mật khẩu mới lên Server
-      const { data } = await axios.put('https://localhost:5000/api/auth/reset-password', { otp, password });
+      const { data } = await axios.put('https://art-shop-fullstack.onrender.com/api/auth/reset-password', { otp, password });
       toast.success(data.data);
       navigate('/login'); // Xong thì về trang đăng nhập
     } catch (error) {

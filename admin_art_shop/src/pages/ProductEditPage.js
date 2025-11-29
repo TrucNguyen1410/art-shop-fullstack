@@ -33,7 +33,7 @@ const ProductEditPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
         try {
-            const { data } = await axios.get('https://localhost:5000/api/categories');
+            const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/categories');
             setCategories(data);
         } catch (error) { console.error(error); }
     };
@@ -49,7 +49,7 @@ const ProductEditPage = () => {
     if (id !== 'new') {
       const fetchProduct = async () => {
           try {
-            const { data } = await axios.get(`https://localhost:5000/api/products/${id}`);
+            const { data } = await axios.get(`https://art-shop-fullstack.onrender.com/api/products/${id}`);
             setName(data.name || '');
             setPrice(data.price || 0);
             setImageUrl(data.imageUrl || '');
@@ -81,8 +81,8 @@ const ProductEditPage = () => {
     };
 
     try {
-      if (id !== 'new') await axios.put(`https://localhost:5000/api/products/${id}`, data, config);
-      else await axios.post('https://localhost:5000/api/products', data, config);
+      if (id !== 'new') await axios.put(`https://art-shop-fullstack.onrender.com/api/products/${id}`, data, config);
+      else await axios.post('https://art-shop-fullstack.onrender.com/api/products', data, config);
       navigate('/'); 
     } catch (err) { alert('Lỗi lưu dữ liệu'); }
   };

@@ -40,7 +40,7 @@ const CheckoutPage = ({ cart, setCart }) => {
       }
       try {
           const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-          const { data } = await axios.post('https://localhost:5000/api/coupons/apply', { 
+          const { data } = await axios.post('https://art-shop-fullstack.onrender.com/api/coupons/apply', { 
               code: couponCode, 
               orderTotal: itemsPrice 
           }, config);
@@ -78,7 +78,7 @@ const CheckoutPage = ({ cart, setCart }) => {
         paymentResult
       };
 
-      await axios.post('https://localhost:5000/api/orders', orderData, config);
+      await axios.post('https://art-shop-fullstack.onrender.com/api/orders', orderData, config);
       
       toast.success("🎉 Đặt hàng thành công! Cảm ơn bạn.");
       localStorage.removeItem('cartItems'); 

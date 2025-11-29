@@ -17,7 +17,7 @@ const OrderProcessPage = () => {
   const fetchOrder = async () => {
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        const { data } = await axios.get(`https://localhost:5000/api/orders/${id}`, config);
+        const { data } = await axios.get(`https://art-shop-fullstack.onrender.com/api/orders/${id}`, config);
         setOrder(data);
     } catch (error) {
         alert("Lỗi tải đơn hàng");
@@ -28,7 +28,7 @@ const OrderProcessPage = () => {
   const deliverHandler = async () => {
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        await axios.put(`https://localhost:5000/api/orders/${id}/deliver`, {}, config);
+        await axios.put(`https://art-shop-fullstack.onrender.com/api/orders/${id}/deliver`, {}, config);
         alert("Đã cập nhật: Giao hàng thành công!");
         fetchOrder();
     } catch (error) { alert("Lỗi cập nhật giao hàng"); }
@@ -38,7 +38,7 @@ const OrderProcessPage = () => {
   const payHandler = async () => {
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-        await axios.put(`https://localhost:5000/api/orders/${id}/pay`, {}, config);
+        await axios.put(`https://art-shop-fullstack.onrender.com/api/orders/${id}/pay`, {}, config);
         alert("Đã cập nhật: Thanh toán thành công!");
         fetchOrder();
     } catch (error) { alert("Lỗi cập nhật thanh toán"); }

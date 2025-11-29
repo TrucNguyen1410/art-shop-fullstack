@@ -23,7 +23,7 @@ const ReviewListPage = () => {
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
         // Gọi API vừa tạo ở Backend (Nhớ đổi https nếu bạn đang dùng SSL)
-        const { data } = await axios.get('https://localhost:5000/api/products/admin/reviews', config);
+        const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/products/admin/reviews', config);
         setReviews(data);
     } catch (error) {
         console.error("Lỗi tải đánh giá");
@@ -34,7 +34,7 @@ const ReviewListPage = () => {
       try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
         // Gọi API trả lời đánh giá (Đã có từ trước)
-        await axios.put(`https://localhost:5000/api/products/${productId}/reviews/${reviewId}/reply`, { reply: replyText }, config);
+        await axios.put(`https://art-shop-fullstack.onrender.com/api/products/${productId}/reviews/${reviewId}/reply`, { reply: replyText }, config);
         
         alert("Đã trả lời thành công!");
         setReplyText('');

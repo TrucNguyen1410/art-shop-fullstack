@@ -30,7 +30,7 @@ const AnalyticsPage = () => {
         try {
             const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
             // Gọi API Thống kê (Lưu ý HTTPS)
-            const { data } = await axios.get('https://localhost:5000/api/orders/admin/summary', config);
+            const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/orders/admin/summary', config);
             setSummary(data);
         } catch (error) {
             console.error("Lỗi tải thống kê:", error);

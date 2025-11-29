@@ -15,7 +15,7 @@ const OrderListPage = () => {
         const fetchOrders = async () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
-                const { data } = await axios.get('https://localhost:5000/api/orders', config);
+                const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/orders', config);
                 setOrders(data);
             } catch (error) {
                 console.error("Lỗi lấy danh sách đơn hàng");

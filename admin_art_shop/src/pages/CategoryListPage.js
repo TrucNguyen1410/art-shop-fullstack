@@ -14,7 +14,7 @@ const CategoryListPage = () => {
   const fetchCategories = async () => {
     try {
       // --- SỬA THÀNH HTTPS ---
-      const { data } = await axios.get('https://localhost:5000/api/categories');
+      const { data } = await axios.get('https://art-shop-fullstack.onrender.com/api/categories');
       setCategories(data);
     } catch (error) {
       console.error("Lỗi tải danh mục:", error);
@@ -27,7 +27,7 @@ const CategoryListPage = () => {
     try {
         const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
         // --- SỬA THÀNH HTTPS ---
-        await axios.post('https://localhost:5000/api/categories', { name: newCategory }, config);
+        await axios.post('https://art-shop-fullstack.onrender.com/api/categories', { name: newCategory }, config);
         setNewCategory('');
         fetchCategories(); 
     } catch (error) {
@@ -40,7 +40,7 @@ const CategoryListPage = () => {
         try {
             const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
             // --- SỬA THÀNH HTTPS ---
-            await axios.delete(`https://localhost:5000/api/categories/${id}`, config);
+            await axios.delete(`https://art-shop-fullstack.onrender.com/api/categories/${id}`, config);
             fetchCategories();
         } catch (error) {
             alert('Lỗi khi xóa');
