@@ -1,0 +1,24 @@
+backend: 
+đổi đường link trong file server_art_shop/.env để kết noosid MongoDB
+PORT=5000
+MONGO_URI= đổi thành đg link gửi trong gr
+JWT_SECRET=ma_bao_mat_bi_mat_123
+
+cd server_art_shop
+node server.js
+
+frontend:
+cd client_art_shop
+npm start
+
+admin:
+cd admin_art_shop
+npm start
+
+CÁCH LẤY LẠI DỮ LIỆU (MỞ KHÓA HTTPS)
+1. Mở một tab trình duyệt mới.
+2. Gõ vào thanh địa chỉ: https://localhost:5000/api/products (Nhớ kĩ là https).
+3. Trình duyệt sẽ hiện màn hình đỏ lòm cảnh báo "Kết nối không riêng tư".
+4. Bấm nút Nâng cao (Advanced) -> Chọn Tiếp tục truy cập localhost (Proceed to localhost).
+5. Khi bạn thấy một đống chữ (JSON) hiện ra trên màn hình trắng, nghĩa là đã thông luồng.
+👉 Giờ bạn quay lại trang Admin (port 3001), bấm F5 (tải lại trang). Dữ liệu sản phẩm cũ sẽ hiện ra đầy đủ không thiếu món nào!
