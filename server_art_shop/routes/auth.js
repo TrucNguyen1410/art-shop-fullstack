@@ -3,14 +3,13 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-// Đảm bảo bạn đã tạo file utils/sendEmail.js như hướng dẫn trước
 const sendEmail = require('../utils/sendEmail'); 
 
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-// 1. ĐĂNG KÝ
+// 1. ĐĂNG KÝ (Giữ nguyên)
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     try {
@@ -28,7 +27,7 @@ router.post('/register', async (req, res) => {
     } catch (error) { res.status(500).json({ message: 'Lỗi server' }); }
 });
 
-// 2. ĐĂNG NHẬP
+// 2. ĐĂNG NHẬP (Giữ nguyên)
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -45,7 +44,7 @@ router.post('/login', async (req, res) => {
     } catch (error) { res.status(500).json({ message: 'Lỗi server' }); }
 });
 
-// 3. QUÊN MẬT KHẨU (GỬI MÃ OTP QUA EMAIL)
+// 3. QUÊN MẬT KHẨU (CHẾ ĐỘ DEMO KHẨN CẤP - LUÔN TRẢ VỀ OTP)
 router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     try {
@@ -54,42 +53,32 @@ router.post('/forgot-password', async (req, res) => {
             return res.status(404).json({ message: 'Email không tồn tại trong hệ thống' });
         }
 
-        // Tạo mã OTP 6 số ngẫu nhiên
+        // Tạo OTP
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-        // Lưu OTP vào DB (field resetPasswordToken)
+        // Lưu OTP vào DB
         user.resetPasswordToken = otp;
-        user.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // Hết hạn sau 10 phút
+        user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
 
         await user.save();
 
-        // Nội dung Email HTML
-        const message = `
-            <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-radius: 10px; max-width: 500px;">
-                <h2 style="color: #e65100;">Yêu cầu đặt lại mật khẩu</h2>
-                <p>Xin chào <strong>${user.username}</strong>,</p>
-                <p>Bạn vừa yêu cầu đặt lại mật khẩu cho tài khoản tại Art Shop.</p>
-                <p>Mã xác thực (OTP) của bạn là:</p>
-                <div style="background: #eee; padding: 10px; text-align: center; border-radius: 5px; margin: 20px 0;">
-                    <h1 style="color: #333; letter-spacing: 5px; margin: 0;">${otp}</h1>
-                </div>
-                <p style="font-size: 0.9rem; color: #666;">Mã này sẽ hết hạn sau 10 phút. Tuyệt đối không chia sẻ mã này cho ai.</p>
-            </div>
-        `;
-
+        // Cố gắng gửi email (nhưng không bắt buộc thành công)
+        const message = `Mã OTP của bạn là: ${otp}`;
         try {
             await sendEmail({
                 email: user.email,
-                subject: 'Mã OTP Đặt Lại Mật Khẩu - Art Shop',
+                subject: 'Mã OTP Art Shop',
                 message
             });
-            res.json({ success: true, data: "Đã gửi mã OTP đến email của bạn!" });
-        } catch (error) {
-            user.resetPasswordToken = undefined;
-            user.resetPasswordExpire = undefined;
-            await user.save();
-            return res.status(500).json({ message: 'Không thể gửi email. Vui lòng kiểm tra lại cấu hình.' });
+        } catch (err) {
+            console.log("Gửi mail thất bại do Google chặn (Bỏ qua để Demo):", err.message);
         }
+
+        // --- QUAN TRỌNG: GỬI LUÔN OTP VỀ CLIENT ĐỂ DEMO ---
+        res.json({ 
+            success: true, 
+            data: `Đã gửi yêu cầu! Mã OTP của bạn là: ${otp}` // <--- Lấy mã ở đây nhập luôn
+        });
 
     } catch (error) {
         res.status(500).json({ message: 'Lỗi server' });
@@ -101,7 +90,6 @@ router.put('/reset-password', async (req, res) => {
     const { otp, password } = req.body;
 
     try {
-        // Tìm user có OTP trùng khớp và còn hạn
         const user = await User.findOne({
             resetPasswordToken: otp,
             resetPasswordExpire: { $gt: Date.now() }
@@ -111,10 +99,7 @@ router.put('/reset-password', async (req, res) => {
             return res.status(400).json({ message: 'Mã OTP không đúng hoặc đã hết hạn' });
         }
 
-        // Cập nhật mật khẩu mới
         user.password = password;
-        
-        // Xóa OTP
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
 
