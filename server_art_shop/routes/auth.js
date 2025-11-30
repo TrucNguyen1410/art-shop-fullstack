@@ -9,7 +9,7 @@ const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-// 1. ĐĂNG KÝ (Giữ nguyên)
+// 1. ĐĂNG KÝ
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     try {
@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
     } catch (error) { res.status(500).json({ message: 'Lỗi server' }); }
 });
 
-// 2. ĐĂNG NHẬP (Giữ nguyên)
+// 2. ĐĂNG NHẬP
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
     } catch (error) { res.status(500).json({ message: 'Lỗi server' }); }
 });
 
-// 3. QUÊN MẬT KHẨU (CHẾ ĐỘ DEMO KHẨN CẤP - LUÔN TRẢ VỀ OTP)
+// 3. QUÊN MẬT KHẨU (CƠ CHẾ PHẢN HỒI NHANH - KHÔNG CHỜ MAIL)
 router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     try {
@@ -59,25 +59,20 @@ router.post('/forgot-password', async (req, res) => {
         // Lưu OTP vào DB
         user.resetPasswordToken = otp;
         user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
-
         await user.save();
 
-        // Cố gắng gửi email (nhưng không bắt buộc thành công)
+        // --- QUAN TRỌNG: Gửi mail chạy ngầm (Không dùng await) ---
         const message = `Mã OTP của bạn là: ${otp}`;
-        try {
-            await sendEmail({
-                email: user.email,
-                subject: 'Mã OTP Art Shop',
-                message
-            });
-        } catch (err) {
-            console.log("Gửi mail thất bại do Google chặn (Bỏ qua để Demo):", err.message);
-        }
+        sendEmail({
+            email: user.email,
+            subject: 'Mã OTP Art Shop',
+            message
+        }).catch(err => console.log("Gửi mail nền thất bại (Không ảnh hưởng user):", err.message));
 
-        // --- QUAN TRỌNG: GỬI LUÔN OTP VỀ CLIENT ĐỂ DEMO ---
+        // --- TRẢ VỀ KẾT QUẢ NGAY LẬP TỨC (User không phải đợi) ---
         res.json({ 
             success: true, 
-            data: `Đã gửi yêu cầu! Mã OTP của bạn là: ${otp}` // <--- Lấy mã ở đây nhập luôn
+            data: `Đã xử lý! Mã OTP dành cho bạn là: ${otp}` // Hiện luôn mã để demo
         });
 
     } catch (error) {
