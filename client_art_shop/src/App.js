@@ -20,6 +20,7 @@ import AboutPage from './pages/AboutPage';
 // --- QUAN TRỌNG: IMPORT 2 TRANG QUÊN MẬT KHẨU ---
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import Chatbot from './components/Chatbot';
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -84,6 +85,7 @@ function App() {
           <Route path="/orders" element={<OrderHistoryPage />} />
         </Routes>
       </div>
+      <Chatbot />
     </Router>
   );
 }
