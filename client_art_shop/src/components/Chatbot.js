@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const API_KEY = 'AIzaSyBpNiY6usYHDmx5v0EhTKKZONW-p3mukqk';
+const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
 const SYSTEM_PROMPT = "Bạn là trợ lý ảo của trang web bán hàng Art Shop. Bạn phải luôn trả lời bằng tiếng Việt, ngắn gọn, thân thiện và lịch sự. Nếu được hỏi về trang web, hãy cung cấp thông tin liên quan đến các sản phẩm nghệ thuật, tranh, đồ thủ công, chính sách giao hàng và đổi trả.";
 
 const Chatbot = () => {
