@@ -24,6 +24,7 @@ const OrderHistoryPage = () => {
     } else {
         fetchOrders();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
   const fetchOrders = async () => {
@@ -64,9 +65,6 @@ const OrderHistoryPage = () => {
   const completedOrders = orders.filter(order => order.isDelivered); 
   const displayedOrders = activeTab === 'shipping' ? shippingOrders : completedOrders;
 
-  const calculateItemsPrice = (items) => {
-      return items.reduce((acc, item) => acc + item.price * item.qty, 0);
-  };
 
   const getPaymentMethodName = (method) => {
       switch(method) {

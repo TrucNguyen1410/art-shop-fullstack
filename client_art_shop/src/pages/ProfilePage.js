@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo')));
+  const [user] = useState(JSON.parse(localStorage.getItem('userInfo')));
 
   // Form state
   const [name, setName] = useState(user?.username || '');
-  const [email, setEmail] = useState(user?.email || '');
+  const [email] = useState(user?.email || '');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
